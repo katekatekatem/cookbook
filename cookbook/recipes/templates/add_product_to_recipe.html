@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Добавление продукта</title>
+  </head>
+  <body>
+    <h2>Добавление продукта</h2>
+    <form method="post" action="{% url 'add_product_to_recipe' %}">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Добавить</button>
+    </form>
+
+    {% if error_message %}
+      <p class="error">{{ error_message }}</p>
+    {% endif %}
+
+    {% if success_message %}
+      <p class="success">{{ success_message }}</p>
+    {% endif %}
+  </body>
+</html>

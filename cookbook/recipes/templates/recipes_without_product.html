@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Рецепты без продукта</title>
+  </head>
+  <body>
+    <h2>Рецепты без продукта</h2>
+    <form method="post" action="{% url 'show_recipes_without_product' %}">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Показать</button>
+    </form>
+
+    {% if error_message %}
+      <p class="error">{{ error_message }}</p>
+
+    {% else %}
+      {% if form.is_bound and not error_message %}
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Название рецепта</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for recipe in recipes %}
+              <tr>
+                <td>{{ recipe.id }}</td>
+                <td>{{ recipe.name }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      {% endif %}
+    {% endif %}
+  </body>
+</html>
